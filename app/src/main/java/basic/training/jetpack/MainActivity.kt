@@ -12,7 +12,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Hi3rdJetpackTheme {
+            Hi3rdJetpackTheme(
+                dynamicColor = false
+            ){
                 NavigationGraph()
             }
         }
