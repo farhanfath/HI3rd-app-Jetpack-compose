@@ -1,5 +1,8 @@
 package basic.training.jetpack.utils
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import basic.training.jetpack.data.model.Valkyrie
 
 object Constants {
@@ -69,4 +72,11 @@ object Constants {
     const val HOME = "Home"
     const val SETTINGS = "Settings"
     const val PROFILE = "Profile"
+    const val GITHUBURL = "https://github.com/farhanfath"
+    const val LINKEDINURL  = "https://www.linkedin.com/in/farhan-fathur/"
+
+    fun navigateToUrl(context: Context, url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        context.startActivity(intent)
+    }
 }

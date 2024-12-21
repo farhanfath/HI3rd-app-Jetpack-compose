@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import basic.training.jetpack.data.model.Valkyrie
@@ -24,7 +23,6 @@ import basic.training.jetpack.di.Injection
 import basic.training.jetpack.ui.components.ImageLoader
 import basic.training.jetpack.utils.UiState
 import basic.training.jetpack.viewmodel.ValkyrieViewModel
-import coil.compose.AsyncImage
 
 @Composable
 fun DetailScreen(valkyrieId: String, viewModel: ValkyrieViewModel = viewModel(factory = Injection.provideVieModelFactory())) {

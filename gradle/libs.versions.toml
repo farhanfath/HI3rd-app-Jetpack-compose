@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.3"
+fontAwesome = "1.1.0"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -11,10 +12,17 @@ composeBom = "2024.04.01"
 navigationCompose = "2.8.5" # navigation
 kotlinxSerializationJson = "1.6.3" # serialization
 
+# compose-icon
+composeIcons = "1.1.1"
+
 [libraries]
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" } # navigation
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" } # viewmodel
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" } # serialization
+
+# font awesome
+composeIcons-fontAwesome = { module = "br.com.devsrsouza.compose.icons:font-awesome", version.ref = "composeIcons" }
+
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

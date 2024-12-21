@@ -8,7 +8,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,7 +37,6 @@ import basic.training.jetpack.data.model.NavigationItem
 import basic.training.jetpack.ui.screens.DetailScreen
 import basic.training.jetpack.ui.screens.HomeScreen
 import basic.training.jetpack.ui.screens.ProfileScreen
-import basic.training.jetpack.ui.screens.SettingsScreen
 import basic.training.jetpack.utils.Constants
 
 @OptIn(ExperimentalMaterial3Api::class)

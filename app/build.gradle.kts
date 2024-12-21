@@ -69,4 +69,7 @@ dependencies {
 
     // coil
     implementation ("io.coil-kt:coil-compose:2.4.0")
+
+    // font - awesome
+    implementation (libs.composeIcons.fontAwesome)
 }
