@@ -1,4 +1,4 @@
-package basic.training.jetpack.ui.view.screen
+package basic.training.jetpack.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package basic.training.jetpack.ui.view.navigation
+package basic.training.jetpack.ui.navigation
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -29,51 +29,50 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import basic.training.jetpack.data.NavigationItem
-import basic.training.jetpack.ui.view.screen.HomeScreen
-import basic.training.jetpack.ui.view.screen.ProfileScreen
-import basic.training.jetpack.ui.view.screen.SettingsScreen
+import androidx.navigation.navArgument
+import basic.training.jetpack.data.model.NavigationItem
+import basic.training.jetpack.ui.screens.DetailScreen
+import basic.training.jetpack.ui.screens.HomeScreen
+import basic.training.jetpack.ui.screens.ProfileScreen
+import basic.training.jetpack.ui.screens.SettingsScreen
+import basic.training.jetpack.utils.Constants
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Navigation() {
+fun NavigationGraph() {
     val navController = rememberNavController()
 
     val items = listOf(
         NavigationItem(
-            name = "Home",
+            name = Constants.HOME,
             icon = Icons.Default.Home
         ),
         NavigationItem(
-            name = "Profile",
+            name = Constants.PROFILE,
             icon = Icons.Default.Person
-        ),
-        NavigationItem(
-            name = "Settings",
-            icon = Icons.Default.Settings
         )
     )
 
     var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
 
     val screenTitle = when(selectedItemIndex) {
-        0 -> "Home"
-        1 -> "Profile"
-        2 -> "Settings"
-        else -> "Home"
+        0 -> Constants.HOME
+        1 -> Constants.PROFILE
+        2 -> Constants.SETTINGS
+        else -> Constants.HOME
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(corner = CornerSize(16.dp))),
+                    .fillMaxWidth(),
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary),
-                title = { Text(text = screenTitle) },
+                title = { Text(text = screenTitle, color = Color.White) },
                 actions = {
                     IconButton(
                         onClick = {}
@@ -86,7 +85,8 @@ fun Navigation() {
         bottomBar = {
             NavigationBar(
                 containerColor = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(top = 2.dp, bottom = 0.dp, start = 0.dp, end = 0.dp)
+                modifier = Modifier
+                    .clip(RoundedCornerShape(corner = CornerSize(30.dp)))
             ) {
                 items.forEachIndexed { index, item ->
                     NavigationBarItem(
@@ -96,10 +96,9 @@ fun Navigation() {
                         onClick = {
                             selectedItemIndex = index
                             val route = when(selectedItemIndex) {
-                                0 -> "home"
-                                1 -> "profile"
-                                2 -> "settings"
-                                else -> "home"
+                                0 -> Constants.HOME
+                                1 -> Constants.PROFILE
+                                else -> Constants.HOME
                             }
 
                             navController.navigate(route) {
@@ -128,21 +127,26 @@ fun Navigation() {
     ) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             selectedItemIndex = when(destination.route) {
-                "Home" -> 0
-                "Profile" -> 1
-                "Settings" -> 2
+                Constants.HOME -> 0
+                Constants.PROFILE -> 1
                 else -> 0
             }
         }
-        NavHost(navController = navController, startDestination = "Home", modifier = Modifier.padding(it)) {
-            composable("Home") {
-                HomeScreen()
+        NavHost(navController = navController, startDestination = Constants.HOME, modifier = Modifier.padding(it)) {
+            composable(Constants.HOME) {
+                HomeScreen { id ->
+                    navController.navigate("detail/$id")
+                }
             }
-            composable("Profile") {
+            composable(Constants.PROFILE) {
                 ProfileScreen()
             }
-            composable("Settings") {
-                SettingsScreen()
+            composable(
+                route = "detail/{id}",
+                arguments = listOf(navArgument("id") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val id = backStackEntry.arguments?.getString("id") ?: ""
+                DetailScreen(valkyrieId = id)
             }
         }
     }
